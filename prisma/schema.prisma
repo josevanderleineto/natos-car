@@ -16,5 +16,4 @@ model Carro {
   quilometragem Int
   descricao     String
   url_imagem    String
-  caracteristicas String? // Opcional
 }
