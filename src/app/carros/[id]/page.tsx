@@ -67,7 +67,12 @@ export default async function CarroDetalhes({ params }: { params: Params }) {
     );
   }
 
-
+  const caracteristicas = carro.caracteristicas
+  ? typeof carro.caracteristicas === 'string' 
+    ? carro.caracteristicas.split(',').map((item) => item.trim())
+    : []
+  : [];
+  
   return (
     <div className="py-12 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4">
@@ -127,7 +132,40 @@ export default async function CarroDetalhes({ params }: { params: Params }) {
                 <p className="text-gray-600">{carro.descricao}</p>
               </div>
 
-              
+              <div className="mb-8">
+                <h2 className="text-xl font-semibold text-gray-800 mb-2">
+                  Características
+                </h2>
+                {caracteristicas.length > 0 ? (
+                  <ul className="grid grid-cols-2 gap-2">
+                    {caracteristicas.map((carac: string, index: number) => (
+                      <li
+                        key={index}
+                        className="flex items-center text-gray-600"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5 mr-2 text-green-500"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        {carac}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-gray-600">
+                    Nenhuma característica informada.
+                  </p>
+                )}
+              </div>
+
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/contato"

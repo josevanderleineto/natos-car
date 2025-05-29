@@ -2,18 +2,19 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// Use DIRECT_URL para migrações
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DIRECT_URL")
 }
 
 model Carro {
-  id              Int      @id @default(autoincrement())
-  marca           String
-  modelo          String
-  ano             Int
-  quilometragem   Int
-  descricao       String
-  url_imagem      String
-  caracteristicas String   @map("características") // Mapeando para o nome da coluna no BD
+  id            Int      @id @default(autoincrement())
+  marca         String
+  modelo        String
+  ano           Int
+  quilometragem Int
+  descricao     String
+  url_imagem    String
+  caracteristicas String? // Opcional
 }
